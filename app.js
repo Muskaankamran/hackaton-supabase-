@@ -1,13 +1,4 @@
-/* ======================================================
-           1) SUPABASE SETUP — paste your project's values here.
-              Find these in: Supabase Dashboard → Project Settings → API
-           ====================================================== */
-        const SUPABASE_URL = "https://jwetiaxftjbaruznxdvn.supabase.co";
-        const SUPABASE_ANON_KEY = "sb_publishable_VG-AtN0FO6n9Bu2Z20fsJA_h53asInD";
-        const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-        /* Where to send a user right after successful login/signup.
-           Change this to any route in your project, e.g. "dashboard.html" */
+import { supabaseClient } from './supabase.js';
         const REDIRECT_AFTER_AUTH = "dashboard.html";
 
         /* ======================================================
