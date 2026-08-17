@@ -5,7 +5,8 @@
    Type: Sora (display) / Inter (body + UI)
    ========================================================= */
 
-:root {
+  
+   :root {
     --ink: #0E1B2E;
     --ink-soft: #16233A;
     --indigo: #3B4CE0;
@@ -661,3 +662,5 @@ button {
         animation: none;
     }
 }
+
+
