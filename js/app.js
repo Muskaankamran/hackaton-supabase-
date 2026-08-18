@@ -1,4 +1,5 @@
 import { supabaseClient } from './supabase.js';
+
         const REDIRECT_AFTER_AUTH = "dashboard.html";
 
         /* ======================================================
