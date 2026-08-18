@@ -1,4 +1,4 @@
-import { supabase } from './supabase.js';
+import { supabaseClient as supabase } from './supabase.js';
 
 // ===============================================
 // STEP 1: Auth check — sirf logged-in user dashboard dekh sake

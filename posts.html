@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Community Posts — CampusConnect</title>
+
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/posts.css" />
+
+</head>
+<body>
+
+  <div class="dashboard-wrapper">
+
+    <a href="dashboard.html" class="back-link">← Back to dashboard</a>
+
+    <!-- ===== Header: title + create button ===== -->
+    <div class="page-header">
+      <h1>Community Posts</h1>
+      <button class="action-btn" id="openCreateModalBtn">+ New post</button>
+    </div>
+
+    <!-- ===== Search ===== -->
+    <div class="search-bar">
+      <span>🔍</span>
+      <input type="text" id="searchInput" placeholder="Search posts..." />
+    </div>
+
+    <!-- ===== Feed ===== -->
+    <div class="posts-feed" id="postsFeed">
+      <!-- posts.js yahan post cards inject karega -->
+      <div class="empty-feed">
+        <div class="icon">📭</div>
+        <p>Loading posts...</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ===== Create / Edit Post Modal ===== -->
+  <div class="modal-overlay" id="postModal">
+    <div class="modal-box">
+      <h2 id="modalTitle">Create post</h2>
+      <form id="postForm">
+        <input type="hidden" id="postId" />
+
+        <label for="postTitle">Title</label>
+        <input type="text" id="postTitle" required maxlength="100" placeholder="What's this about?" />
+
+        <label for="postDescription">Description</label>
+        <textarea id="postDescription" required maxlength="500" placeholder="Share the details..."></textarea>
+
+        <label for="postImage">Image (optional)</label>
+        <input type="file" id="postImage" accept="image/*" />
+
+        <div class="modal-footer">
+          <button type="button" class="action-btn secondary" id="cancelModalBtn">Cancel</button>
+          <button type="submit" class="action-btn" id="submitPostBtn">Publish</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Supabase SDK -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script type="module" src="js/supabase.js"></script>
+  <script type="module" src="js/posts.js"></script>
+</body>
+</html>

@@ -108,19 +108,7 @@ import { supabaseClient } from './supabase.js';
                 options: { data: { full_name: fullName } }
             });
             setLoading(submitBtn, false);
-    if (data.user && !error) {
-        const { error: profileError } = await supabaseClient
-            .from('profiles')
-            .insert({
-                id: data.user.id,       // auth user ki id, profile ki id bhi yehi hogi
-                name: fullName,
-                role: 'user'            // default role
-            });
 
-        if (profileError) {
-            console.error('Profile creation error:', profileError);
-        }
-    }
             if (error) {
                 showStatus(error.message, 'error');
                 return;
