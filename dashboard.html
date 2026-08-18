@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard — CampusConnect</title>
+
+  <link rel="stylesheet" href="css/dashboard.css" />
+
+
+</head>
+<body>
+    <div class="topbar">
+      <div class="welcome-text">
+        <h1 id="welcomeMsg">Welcome 👋</h1>
+        <p>Here's what's happening today</p>
+      </div>
+
+      <div class="topbar-actions">
+        <div style="position:relative;">
+          <button class="icon-btn" id="notifBtn" aria-label="Notifications">
+            🔔
+            <span class="notif-badge" id="notifBadge" style="display:none;">0</span>
+          </button>
+
+          <div class="notif-panel" id="notifPanel">
+            <div class="notif-panel-header">Notifications</div>
+            <div id="notifList">
+              <div class="empty-state">No notifications yet</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="avatar" id="userAvatar">?</div>
+      </div>
+    </div>
+
+    <!-- ===== Stat cards ===== -->
+    <div class="stats-grid" id="statsGrid">
+      <div class="stat-card">
+        <p class="label">Total posts</p>
+        <p class="value" id="statPosts">–</p>
+      </div>
+      <div class="stat-card">
+        <p class="label">Upcoming events</p>
+        <p class="value" id="statEvents">–</p>
+      </div>
+      <div class="stat-card">
+        <p class="label">Notifications</p>
+        <p class="value accent" id="statNotifs">–</p>
+      </div>
+    </div>
+
+    <!-- ===== Quick actions ===== -->
+    <div class="quick-actions">
+      <button class="action-btn" onclick="window.location.href='posts.html?new=1'">
+        + Create post
+      </button>
+      <button class="action-btn secondary" onclick="window.location.href='events.html?new=1'">
+        📅 Create event
+      </button>
+      <button class="action-btn secondary" onclick="window.location.href='study-partners.html'">
+        🧑‍🤝‍🧑 Find study partner
+      </button>
+        <button class="action-btn secondary" onclick="window.location.href='poll.html'">
+        📊 Create poll
+      </button>
+    </div>
+
+    <!-- ===== Announcements ===== -->
+    <div class="section">
+      <p class="section-title">Latest announcements</p>
+      <div id="announcementsList">
+        <div class="empty-state">No announcements yet</div>
+      </div>
+    </div>
+
+  </div>
+    <!-- Supabase SDK -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm"></script>
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <script type="module" src="js/supabase.js"></script>
+  <script type="module" src="js/dashboard.js"></script>
+</body>
+</html>

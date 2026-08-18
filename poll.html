@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CampusConnect — Polls</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="./css/poll.css">
+
+    <!-- Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <!-- JS -->
+    <script type="module" src="./js/poll.js"></script>
+</head>
+
+<body>
+
+    <main class="polls-page">
+
+        <!-- =================================
+             HEADER
+        ================================== -->
+
+        <header class="poll-header">
+
+            <div class="header-left">
+
+                <div class="header-icon">
+                    ◈
+                </div>
+
+                <div>
+                    <p class="eyebrow">CAMPUSCONNECT</p>
+
+                    <h1>Community Polls</h1>
+
+                    <p class="header-description">
+                        Share your opinion and see what your campus community thinks.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <button class="create-btn" id="openPollModal">
+                <span>+</span>
+                Create Poll
+            </button>
+
+        </header>
+
+
+        <!-- =================================
+             STATS
+        ================================== -->
+
+        <section class="stats-grid">
+
+            <div class="stat-card">
+
+                <div class="stat-icon indigo">
+                    ◈
+                </div>
+
+                <div>
+                    <p>Active Polls</p>
+                    <h2 id="pollCount">0</h2>
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon gold">
+                    ◉
+                </div>
+
+                <div>
+                    <p>Total Votes</p>
+                    <h2 id="voteCount">0</h2>
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon green">
+                    ✓
+                </div>
+
+                <div>
+                    <p>Your Votes</p>
+                    <h2 id="yourVoteCount">0</h2>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================
+             SEARCH
+        ================================== -->
+
+        <section class="toolbar">
+
+            <div class="search-wrapper">
+
+                <span class="search-icon">⌕</span>
+
+                <input type="search" id="searchInput" placeholder="Search polls...">
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================
+             POLLS
+        ================================== -->
+
+        <section class="poll-section">
+
+            <div class="section-title">
+
+                <div>
+                    <h2>Latest Polls</h2>
+
+                    <p>
+                        Vote and make your voice heard.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <!-- Loading -->
+
+            <div class="loading" id="loading">
+
+                <div class="spinner"></div>
+
+                <p>Loading polls...</p>
+
+            </div>
+
+
+            <!-- Polls will come here -->
+
+            <div class="poll-list" id="pollList"></div>
+
+
+            <!-- Empty -->
+
+            <div class="empty-state" id="emptyState" hidden>
+
+                <div class="empty-icon">
+                    ◈
+                </div>
+
+                <h3>No polls yet</h3>
+
+                <p>
+                    Be the first student to create a poll.
+                </p>
+
+                <button class="empty-create-btn" id="emptyCreateBtn">
+                    Create First Poll
+                </button>
+
+            </div>
+
+
+            <!-- Error -->
+
+            <div class="error-state" id="errorState" hidden>
+
+                <div class="error-icon">
+                    !
+                </div>
+
+                <h3>Unable to load polls</h3>
+
+                <p id="errorText">
+                    Something went wrong.
+                </p>
+
+                <button id="retryBtn">
+                    Try Again
+                </button>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =================================
+         CREATE POLL MODAL
+    ================================== -->
+
+    <div class="modal" id="pollModal">
+
+        <div class="modal-box">
+
+            <button class="close-modal" id="closeModal">
+                ×
+            </button>
+
+
+            <div class="modal-heading">
+
+                <div class="modal-icon">
+                    ◈
+                </div>
+
+                <div>
+
+                    <span>CREATE POLL</span>
+
+                    <h2>Ask the Community</h2>
+
+                    <p>
+                        Create a question and let students vote.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <form id="pollForm">
+
+                <!-- Question -->
+
+                <div class="form-group">
+
+                    <label for="question">
+                        Poll Question
+                    </label>
+
+                    <textarea id="question" maxlength="250"
+                        placeholder="Example: Which technology should we learn next?" required></textarea>
+
+                    <small>
+                        <span id="characterCount">0</span>/250
+                    </small>
+
+                </div>
+
+
+                <!-- Options -->
+
+                <div class="form-group">
+
+                    <div class="options-heading">
+
+                        <label>
+                            Poll Options
+                        </label>
+
+                        <span>
+                            Add 2–5 options
+                        </span>
+
+                    </div>
+
+
+                    <div class="option-input">
+
+                        <b>01</b>
+
+                        <input type="text" class="poll-option" placeholder="First option" maxlength="100" required>
+
+                    </div>
+
+
+                    <div class="option-input">
+
+                        <b>02</b>
+
+                        <input type="text" class="poll-option" placeholder="Second option" maxlength="100" required>
+
+                    </div>
+
+
+                    <div class="option-input">
+
+                        <b>03</b>
+
+                        <input type="text" class="poll-option" placeholder="Third option" maxlength="100">
+
+                    </div>
+
+
+                    <div class="option-input">
+
+                        <b>04</b>
+
+                        <input type="text" class="poll-option" placeholder="Fourth option" maxlength="100">
+
+                    </div>
+
+
+                    <div class="option-input">
+
+                        <b>05</b>
+
+                        <input type="text" class="poll-option" placeholder="Fifth option" maxlength="100">
+
+                    </div>
+
+                </div>
+
+
+                <p class="form-error" id="formError" hidden></p>
+
+
+                <div class="modal-actions">
+
+                    <button type="button" class="cancel-btn" id="cancelBtn">
+                        Cancel
+                    </button>
+
+                    <button type="submit" class="submit-btn" id="submitBtn">
+                        Create Poll
+                        <span>→</span>
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <!-- =================================
+         TOAST
+    ================================== -->
+
+    <div class="toast" id="toast"></div>
+
+</body>
+
+</html>
